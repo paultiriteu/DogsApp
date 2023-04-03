@@ -16,7 +16,9 @@ struct ListView: View {
                 ProgressView("Breeds are loading...")
             } else {
                 List(viewModel.breeds) { breed in
-                    Text(breed.attributes.name)
+                    Button(breed.attributes.name) {
+                        viewModel.didSelectBreed(breed)
+                    }
                 }
                 .refreshable {
                     viewModel.getBreeds()

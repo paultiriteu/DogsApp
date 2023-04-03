@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct DetailsView: View {
+    let viewModel: DetailsViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(viewModel.information) { <#Binding<Identifiable>#> in
+            <#code#>
+        }
     }
 }
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView()
+        DetailsView(viewModel: DetailsViewModel(breed: Breed(id: "", type: "", attributes: BreedAttributes(name: "", description: "", lifeRange: Range(max: 0, min: 0), maleWeightRange: Range(max: 0, min: 0), femaleWeightRange: Range(max: 0, min: 0), hypoallergenic: false))))
     }
 }

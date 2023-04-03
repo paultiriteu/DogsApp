@@ -14,4 +14,9 @@ class AppCoordinatorFactory {
         let view = ListView(viewModel: viewModel)
         return UIHostingController(rootView: view)
     }
+    
+    func createDetailsViewController(viewModel: DetailsViewModel) -> UIViewController {
+        let view = DetailsView(viewModel: viewModel)
+        return UIHostingController(rootView: view)
+    }
 }

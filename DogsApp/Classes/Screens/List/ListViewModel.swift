@@ -12,14 +12,18 @@ class ListViewModel: ObservableObject {
     private let repository: ListRepositoryProtocol
     private var subscriptions = [AnyCancellable]()
     
-    lazy var onFinished = onFinishedSubject.eraseToAnyPublisher()
-    let onFinishedSubject = PassthroughSubject<Void, Never>()
+    lazy var onShowDetails = onShowDetailsSubject.eraseToAnyPublisher()
+    private let onShowDetailsSubject = PassthroughSubject<Breed, Never>()
 
     @Published var breeds: [Breed] = []
     @Published var isLoading = false
     
     init(repository: ListRepositoryProtocol) {
         self.repository = repository
+    }
+    
+    func didSelectBreed(_ breed: Breed) {
+        onShowDetailsSubject.send(breed)
     }
     
     func getBreeds() {

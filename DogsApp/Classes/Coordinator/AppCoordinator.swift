@@ -45,13 +45,19 @@ class AppCoordinator {
         let repository = ListRepository(service: apiService, configuration: serviceConfiguration)
         let viewModel = ListViewModel(repository: repository)
         
-        viewModel.onFinished
-            .sink { _ in
-                // pushViewController
+        viewModel.onShowDetails
+            .sink { [weak self] breed in
+                self?.pushDetailsViewController(breed: breed)
             }
             .store(in: &subscriptions)
         
         let viewController = factory.createListViewController(viewModel: viewModel)
+        router.push(viewController)
+    }
+    
+    func pushDetailsViewController(breed: Breed) {
+        let viewModel = DetailsViewModel(breed: breed)
+        let viewController = factory.createDetailsViewController(viewModel: viewModel)
         router.push(viewController)
     }
 }
